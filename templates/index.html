@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Food Nutrition Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f2f2f2; }
+        .container { width: 600px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px #aaa; }
+        h1 { display: flex; align-items: center; }
+        h1 img { width: 50px; height: 50px; margin-right: 10px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        select, button { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background-color: #4CAF50; color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #45a049; }
+        pre { background-color: #eee; padding: 10px; border-radius: 5px; margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><img src="{{ url_for('static', filename='images.PNG') }}" alt="Logo"> Daily Food Nutrition Predictor</h1>
+        <form method="POST">
+            <label for="food_item">Select Food Item:</label>
+            <select name="food_item" id="food_item" required>
+                {% for item in food_items %}
+                    <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="category">Select Category:</label>
+            <select name="category" id="category" required>
+                {% for cat in categories %}
+                    <option value="{{ cat }}">{{ cat }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Predict Nutrition</button>
+        </form>
+
+        {% if prediction_text %}
+        <pre>{{ prediction_text }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>
